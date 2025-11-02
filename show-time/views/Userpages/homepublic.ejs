@@ -10,14 +10,16 @@
 
 <body class="bg-black">
 
-  <!-- <div class="bg-radial-[at_50%_5%]  backdrop-blur-sm opacity-80  from-purple-50 via-sky-50 to-purple-300"> -->
-  <div class=" bg-cover bg-[url('/assets/images/image5.jpg')] relative">
+  <!-- Hero Section with Background -->
+  <div class="bg-cover bg-center bg-[url('/assets/images/image5.jpg')] relative">
     <div class="bg-black opacity-65 inset-0 absolute"></div>
     <div class="relative">
-      <header class="bg-transparent flex py-2 px-6 sm:px-10 min-h-[84px] tracking-wide z-50">
-        <div class="flex flex-wrap items-center gap-5 w-full max-w-screen-xl mx-auto">
+      
+      <!-- Header - Fully Responsive -->
+      <header class="bg-transparent flex py-2 px-4 sm:px-6 lg:px-10 min-h-[70px] sm:min-h-[84px] tracking-wide z-50">
+        <div class="flex flex-wrap items-center gap-3 sm:gap-5 w-full max-w-screen-xl mx-auto">
           <a href="/" class="max-sm:hidden">
-            <img src="/assets/images/logovf5.png" alt="logo" class="w-36" />
+            <img src="/assets/images/logovf5.png" alt="logo" class="w-28 sm:w-36" />
           </a>
 
           <div id="collapseMenu" class="lg:ml-10 max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50">
@@ -33,120 +35,101 @@
                 <a href="/"><img src="/assets/images/logovf5.png" alt="logo" class="w-36" /></a>
               </li>
               <li class="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-2">
-                <a href='/' class="text-base text-white hover:text-indigo-700 block font-semibold">Home</a>
+                <a href='/' class="text-sm sm:text-base text-white lg:text-white max-lg:text-gray-800 hover:text-indigo-700 block font-semibold">Home</a>
               </li>
               <li class="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-2">
-                <a href='/events/list' class="text-base text-white hover:text-indigo-700 block font-semibold">Events</a>
+                <a href='/events/list' class="text-sm sm:text-base text-white lg:text-white max-lg:text-gray-800 hover:text-indigo-700 block font-semibold">Events</a>
               </li>
               <li class="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-2">
-                <a href='#' class="text-base text-white hover:text-indigo-700 block font-semibold">Populars tickets</a>
+                <a href='#' class="text-sm sm:text-base text-white lg:text-white max-lg:text-gray-800 hover:text-indigo-700 block font-semibold">Popular tickets</a>
               </li>
               <li class="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-2">
-                <a href='#' class="text-base text-white hover:text-indigo-700 block font-semibold">About us</a>
+                <a href='#' class="text-sm sm:text-base text-white lg:text-white max-lg:text-gray-800 hover:text-indigo-700 block font-semibold">About us</a>
               </li>
             </ul>
           </div>
 
-          <div class="flex gap-4 ml-auto items-center">
+          <div class="flex gap-2 sm:gap-4 ml-auto items-center">
             <% if (user) { %>
             <!-- User is logged in -->
-            <div class="flex items-center gap-4">
-              <div class="text-white">
-                <span class="font-semibold"><%= user.username %></span>
+            <div class="flex items-center gap-2 sm:gap-4">
+              <div class="text-white hidden sm:block">
+                <span class="font-semibold text-sm sm:text-base"><%= user.username %></span>
                 <% if (user.role === 'ADMIN') { %>
                 <span class="ml-2 text-xs bg-orange-700 px-2 py-1 rounded">Admin</span>
                 <% } %>
               </div>
-              <!-- <div class="relative group">
-                <button class="bg-orange-700 hover:bg-black border border-orange-700 transition-all text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">
-                  My Account
-                </button>
-               Dropdown Menu 
-                <div class="hidden group-hover:block absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50">
-                  <a href="/auth/me" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg">Profile</a>
-                  <a href="/bookings" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My Bookings</a>
-                  <% if (user.role === 'ADMIN') { %>
-                  <a href="/admin" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Admin Panel</a>
-                  <% } %>
-                  <form action="/auth/logout" method="POST" class="block">
-                    <button type="submit" class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 rounded-b-lg">
-                      Logout
-                    </button>
-                  </form>
-                </div>
-              </div> -->
+              
               <div class="relative group">
-
-                <button class="bg-orange-700 hover:bg-black border border-orange-700 transition-all text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">
+                <button class="bg-orange-700 hover:bg-black border border-orange-700 transition-all text-xs sm:text-base text-white font-medium rounded-lg px-3 sm:px-6 py-2 sm:py-3 cursor-pointer outline-0">
                   My Account
                 </button>
                 <!-- Dropdown Menu -->
                 <div class="hidden group-hover:block absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-50">
-                  <a href="/auth/me" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg">Profile</a>
+                  <a href="/auth/me" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 rounded-t-lg text-sm">Profile</a>
                   <% if (user.role === 'ADMIN') { %>
-                  <a href="/users/dash" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Admin Panel</a>
+                  <a href="/users/dash" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm">Admin Panel</a>
                   <% } else { %>
-                  <a href="/users/<%= user.id %>/dashuser" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My Bookings</a>
+                  <a href="/users/<%= user.id %>/dashuser" class="block px-4 py-2 text-gray-800 hover:bg-gray-100 text-sm">My Bookings</a>
                   <% }%>
                   <form action="/auth/logout" method="POST" class="block">
-                    <button type="submit" class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 rounded-b-lg">
+                    <button type="submit" class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 rounded-b-lg text-sm">
                       Logout
                     </button>
                   </form>
                 </div>
-
               </div>
             </div>
             <% } else { %>
             <!-- User is NOT logged in -->
-            <a href="/auth/login" class="bg-transparent hover:border-white border border-gray-400 transition-all text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">
+            <a href="/auth/login" class="bg-transparent hover:border-white border border-gray-400 transition-all text-xs sm:text-base text-white font-medium rounded-lg px-3 sm:px-6 py-2 sm:py-3 cursor-pointer outline-0">
               Login
             </a>
-            <a href="/auth/register" class="bg-orange-700 hover:bg-black border border-orange-700 transition-all text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">
+            <a href="/auth/register" class="bg-orange-700 hover:bg-black border border-orange-700 transition-all text-xs sm:text-base text-white font-medium rounded-lg px-3 sm:px-6 py-2 sm:py-3 cursor-pointer outline-0">
               Register
             </a>
             <% } %>
 
             <button id="toggleOpen" class="lg:hidden cursor-pointer">
-              <svg class="w-7 h-7" fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <svg class="w-6 h-6 sm:w-7 sm:h-7" fill="#fff" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
               </svg>
             </button>
           </div>
         </div>
       </header>
+
+      <!-- Hero Content - Only for non-logged users -->
       <% if (!user) { %>
-      <div class="px-6 sm:px-10 py-12 md:py-16">
+      <div class="px-4 sm:px-6 lg:px-10 py-8 sm:py-12 md:py-16">
         <div class="max-w-screen-xl mx-auto">
-          <div class="grid lg:grid-cols-2 justify-center items-center gap-12">
+          <div class="grid lg:grid-cols-2 justify-center items-center gap-8 lg:gap-12">
             <div>
               <div class="max-w-3xl max-lg:mx-auto max-lg:text-center">
-                <p class="mb-2 font-medium text-indigo-600  uppercase"><span class="rotate-90 inline-block mr-2">|</span>
+                <p class="mb-2 font-medium text-indigo-600 text-xs sm:text-sm uppercase"><span class="rotate-90 inline-block mr-2">|</span>
                   Show Tickets</p>
-                <h1 class="text-white md:text-5xl text-4xl font-bold ">What Event would you like to go to?
-                </h1>
-                <p class="text-white text-base leading-relaxed mt-6"> More than 100 event are now available to you.</p>
+                <h1 class="text-white text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">What Event would you like to go to?</h1>
+                <p class="text-white text-sm sm:text-base leading-relaxed mt-4 sm:mt-6">More than 100 events are now available to you.</p>
 
-                <div class="mt-12 flex flex-wrap gap-6 max-lg:justify-center">
-                  <button type='button' class="bg-orange-700 hover:bg-black border border-orange-700 transition-all text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">Get
-                    Started Free</button>
-                  <button type='button' class="bg-transparent hover:border-white border border-gray-400 transition-all text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">Integrations</button>
+                <div class="mt-8 sm:mt-12 flex flex-col sm:flex-row flex-wrap gap-4 sm:gap-6 max-lg:justify-center">
+                  <button type='button' class="w-full sm:w-auto bg-orange-700 hover:bg-black border border-orange-700 transition-all text-sm sm:text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">Get Started Free</button>
+                  <button type='button' class="w-full sm:w-auto bg-transparent hover:border-white border border-gray-400 transition-all text-sm sm:text-base text-white font-medium rounded-lg px-6 py-3 cursor-pointer outline-0">Integrations</button>
                 </div>
               </div>
 
-              <div class="flex items-center flex-wrap max-lg:justify-center gap-4 mt-8">
+              <div class="flex items-center flex-wrap max-lg:justify-center gap-4 mt-6 sm:mt-8">
                 <div class="flex -space-x-2">
-                  <img class="w-10 h-10 rounded-full border-2 border-white" src="https://readymadeui.com/team-1.webp" alt="img-1" />
-                  <img class="w-10 h-10 rounded-full border-2 border-white" src="https://readymadeui.com/team-2.webp" alt="img-2" />
-                  <img class="w-10 h-10 rounded-full border-2 border-white" src="https://readymadeui.com/team-3.webp" alt="img-3" />
+                  <img class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white" src="https://readymadeui.com/team-1.webp" alt="img-1" />
+                  <img class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white" src="https://readymadeui.com/team-2.webp" alt="img-2" />
+                  <img class="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white" src="https://readymadeui.com/team-3.webp" alt="img-3" />
                 </div>
-                <div class="text-white text-base">
+                <div class="text-white text-sm sm:text-base">
                   <span class="font-semibold">Over 10,000</span> Professionals trust us
                 </div>
               </div>
             </div>
 
-            <div class="w-full aspect-[42/33]">
+            <div class="w-full aspect-[42/33] max-lg:max-w-md max-lg:mx-auto">
               <img src="/assets/images/ticket.png" alt="banner img" class="w-full h-full object-contain" />
             </div>
           </div>
@@ -154,390 +137,391 @@
       </div>
       <% } %>
     </div>
-
   </div>
-  <section class=" px-30 mt-10">
+
+  <!-- Main Content Section -->
+  <section class="px-4 sm:px-6 lg:px-10 mt-10">
     <% if (!user) { %>
-    <!-- Festivals section -->
-    <div class=" inline-flex flex-col justify-start items-start gap-8  px-50 ">
-      <div data-show-see-all="true" data-subtitle="true" class="w-[1224px] flex flex-col justify-start items-start gap-6">
-        <div class="self-stretch h-16 py-2 border-b border-stone-900 inline-flex justify-between items-center">
-          <div class="justify-center text-white text-3xl font-semibold font-['Inter']">Festivals</div>
-          <div data-left-icon="false" data-right-icon="false" data-size="32" data-state="active" data-style="Text" class="h-8 px-4 py-[3px] rounded-lg flex justify-center items-center gap-2 overflow-hidden">
-            <a href="/auth/login" class="justify-start text-white text-base font-normal font-['Inter'] leading-5">See all</a>
-          </div>
+    
+    <!-- Festivals section - NON LOGGED USERS -->
+    <div class="max-w-screen-xl mx-auto mb-12 sm:mb-16">
+      <div class="mb-6 sm:mb-8">
+        <div class="flex justify-between items-center pb-4 border-b border-stone-900">
+          <h2 class="text-white text-2xl sm:text-3xl font-semibold">Festivals</h2>
+          <a href="/auth/login" class="text-white text-sm sm:text-base font-normal hover:text-orange-400 transition">See all</a>
         </div>
       </div>
-      <div class="self-stretch inline-flex  justify-start items-center gap-6 overflow-x-auto">
+      
+      <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
         <% if (festivals && festivals.length > 0) { %>
         <% festivals.forEach(function(event) { %>
-        <div class="w-72 min-w-72 inline-flex flex-col justify-center items-center">
-          <div class="self-stretch h-80 relative rounded-[20px]">
-            <img class="w-72 h-80 left-0 top-0 absolute rounded-[20px] object-cover" src="<%= event.imageUrls && event.imageUrls.length > 0 ? event.imageUrls[0] : '/assets/images/default-event.jpg' %>" alt="<%= event.title %>" />
+        <div class="w-64 sm:w-72 min-w-[16rem] sm:min-w-[18rem] flex-shrink-0">
+          <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden mb-4">
+            <img class="w-full h-full object-cover" src="<%= event.imageUrls && event.imageUrls.length > 0 ? event.imageUrls[0] : '/assets/images/default-event.jpg' %>" alt="<%= event.title %>" />
           </div>
-          <div class="self-stretch h-40 px-2 flex flex-col justify-end items-start gap-2">
-            <div class="self-stretch bg-gradient-to-l from-stone-800 to-orange-900 rounded-2xl outline outline-1 outline-offset-[-1px] outline-zinc-800 backdrop-blur-[32px] flex flex-col justify-end items-start">
-              <div class="self-stretch p-4 flex flex-col justify-start items-start gap-4">
-                <a href="/events/<%= event.id %>/details" class=" truncate w-60 justify-start text-white text-lg font-bold font-['Inter'] hover:text-orange-400 transition">
-                  <%= event.title %>
-                </a>
-                <div class="self-stretch inline-flex flex-col justify-between">
-                  <div class="flex justify-start items-start gap-1">
-                    <div class="size-4 relative rounded-[5px] overflow-hidden">
-                      <div class="size-3.5 left-[0.83px] top-[1.17px] absolute bg-neutral-400"></div>
-                    </div>
-                    <div class=" truncate w-60 justify-start text-white text-sm font-normal font-['Inter']">
-                      <%= new Date(event.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
-                    </div>
-                  </div>
-                  <div class="flex justify-end items-center gap-1">
-                    <div class="size-4 relative overflow-hidden">
-                      <div class="w-3 h-3.5 left-[2.17px] top-[0.83px] absolute bg-neutral-400"></div>
-                    </div>
-                    <div class="truncate line-clamp-1 slice(10) w-30 justify-center text-white text-sm font-normal font-['Inter']"><%= event.location %></div>
-                  </div>
-                </div>
-                <div class="inline-flex justify-start items-center gap-2">
-                  <div class="justify-start text-white text-xl font-bold font-['Inter']">from</div>
-                  <div class="justify-start text-white text-xl font-bold font-['Inter']"><%= event.price.toLocaleString() %> CFA</div>
-                </div>
+          <div class="bg-gradient-to-l from-stone-800 to-orange-900 rounded-2xl border border-zinc-800 backdrop-blur-sm p-4">
+            <a href="/events/<%= event.id %>/details" class="block text-white text-base sm:text-lg font-bold hover:text-orange-400 transition line-clamp-2 mb-3">
+              <%= event.title %>
+            </a>
+            <div class="space-y-2 mb-3">
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span class="text-white text-xs sm:text-sm truncate">
+                  <%= new Date(event.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+                </span>
               </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="text-white text-xs sm:text-sm truncate"><%= event.location %></span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-white text-sm font-normal">from</span>
+              <span class="text-white text-lg sm:text-xl font-bold"><%= event.price.toLocaleString() %> CFA</span>
             </div>
           </div>
         </div>
         <% }); %>
         <% } else { %>
         <div class="text-white text-center w-full py-10">
-          <p class="text-xl">No festivals available at the moment</p>
-        </div>
-        <% } %>
-      </div>
-    </div> <br>
-
-    <!-- Concert section -->
-    <div class="inline-flex flex-col justify-start items-start gap-8 px-50 mt-20">
-      <div data-show-see-all="true" data-subtitle="true" class="w-[1224px] flex flex-col justify-start items-start gap-6">
-        <div class="self-stretch h-16 py-2 border-b border-stone-900 inline-flex justify-between items-center">
-          <div class="justify-center text-white text-3xl font-semibold font-['Inter']">Concerts</div>
-          <div data-left-icon="false" data-right-icon="false" data-size="32" data-state="active" data-style="Text" class="h-8 px-4 py-[3px] rounded-lg flex justify-center items-center gap-2 overflow-hidden">
-            <a href="/auth/login" class="justify-start text-white text-base font-normal font-['Inter'] leading-5">See all</a>
-          </div>
-        </div>
-      </div>
-      <div class="self-stretch inline-flex justify-start items-center gap-6 overflow-x-auto">
-        <% if (concerts && concerts.length > 0) { %>
-        <% concerts.forEach(function(event) { %>
-        <div class="w-72 min-w-72 inline-flex flex-col justify-center items-center">
-          <div class="self-stretch h-80 relative rounded-[20px]">
-            <img class="w-72 h-80 left-0 top-0 absolute rounded-[20px] object-cover" src="<%= event.imageUrls && event.imageUrls.length > 0 ? event.imageUrls[0] : '/assets/images/default-event.jpg' %>" alt="<%= event.title %>" />
-          </div>
-          <div class="self-stretch h-40 px-2 flex flex-col justify-end items-start gap-2">
-            <div class="self-stretch bg-gradient-to-l from-stone-800 to-orange-900 rounded-2xl outline outline-1 outline-offset-[-1px] outline-zinc-800 backdrop-blur-[32px] flex flex-col justify-end items-start overflow-hidden">
-              <div class="self-stretch p-4 flex flex-col justify-start items-start gap-4">
-                <a href="/events/<%= event.id %>/details" class=" truncate w-60 justify-start text-white text-lg font-bold font-['Inter'] hover:text-orange-400 transition">
-                  <%= event.title %>
-                </a>
-                <div class="self-stretch inline-flex flex-col justify-between">
-                  <div class="flex justify-start items-start gap-1">
-                    <div class="size-4 relative rounded-[5px] overflow-hidden">
-                      <div class="size-3.5 left-[0.83px] top-[1.17px] absolute bg-neutral-400"></div>
-                    </div>
-                    <div class="justify-start text-white text-sm font-normal font-['Inter']">
-                      <%= new Date(event.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
-                    </div>
-                  </div>
-                  <div class="flex justify-end items-center gap-1">
-                    <div class="size-4 relative overflow-hidden">
-                      <div class="w-3 h-3.5 left-[2.17px] top-[0.83px] absolute bg-neutral-400"></div>
-                    </div>
-                    <div class="justify-center truncate line-clamp-1 slice(10) w-30 text-white text-sm font-normal font-['Inter']"><%= event.location %></div>
-                  </div>
-                </div>
-                <div class="inline-flex justify-start items-center gap-2">
-                  <div class="justify-start text-white text-2xl font-bold font-['Inter']">from</div>
-                  <div class="justify-start text-white text-2xl font-bold font-['Inter']"><%= event.price.toLocaleString() %> CFA</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% }); %>
-        <% } else { %>
-        <div class="text-white text-center w-full py-10">
-          <p class="text-xl">No festivals available at the moment</p>
+          <p class="text-lg sm:text-xl">No festivals available at the moment</p>
         </div>
         <% } %>
       </div>
     </div>
-    <% } else { %>
-    <!--Searche bar with the filter-->
-    <div class="bg-gradient-to-r from-stone-900 to-stone-800 rounded-2xl p-6 shadow-lg">
-      <form id="searchFilterForm" method="GET" action="/" class="space-y-6">
 
-        <div class="relative">
-          <input type="text" name="search" id="searchInput" value="<%= currentFilters?.search || '' %>" placeholder="Search events by title or description..." class="w-full px-12 py-4 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent transition" />
-          <svg class="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-          </svg>
+    <!-- Concerts section - NON LOGGED USERS -->
+    <div class="max-w-screen-xl mx-auto mb-12 sm:mb-16">
+      <div class="mb-6 sm:mb-8">
+        <div class="flex justify-between items-center pb-4 border-b border-stone-900">
+          <h2 class="text-white text-2xl sm:text-3xl font-semibold">Concerts</h2>
+          <a href="/auth/login" class="text-white text-sm sm:text-base font-normal hover:text-orange-400 transition">See all</a>
         </div>
+      </div>
+      
+      <div class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0">
+        <% if (concerts && concerts.length > 0) { %>
+        <% concerts.forEach(function(event) { %>
+        <div class="w-64 sm:w-72 min-w-[16rem] sm:min-w-[18rem] flex-shrink-0">
+          <div class="relative h-72 sm:h-80 rounded-2xl overflow-hidden mb-4">
+            <img class="w-full h-full object-cover" src="<%= event.imageUrls && event.imageUrls.length > 0 ? event.imageUrls[0] : '/assets/images/default-event.jpg' %>" alt="<%= event.title %>" />
+          </div>
+          <div class="bg-gradient-to-l from-stone-800 to-orange-900 rounded-2xl border border-zinc-800 backdrop-blur-sm p-4">
+            <a href="/events/<%= event.id %>/details" class="block text-white text-base sm:text-lg font-bold hover:text-orange-400 transition line-clamp-2 mb-3">
+              <%= event.title %>
+            </a>
+            <div class="space-y-2 mb-3">
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <span class="text-white text-xs sm:text-sm truncate">
+                  <%= new Date(event.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
+                </span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="text-white text-xs sm:text-sm truncate"><%= event.location %></span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-white text-sm font-normal">price</span>
+              <span class="text-white text-lg sm:text-xl font-bold"><%= event.price.toLocaleString() %> CFA</span>
+            </div>
+          </div>
+        </div>
+        <% }); %>
+        <% } else { %>
+        <div class="text-white text-center w-full py-10">
+          <p class="text-lg sm:text-xl">No concerts available at the moment</p>
+        </div>
+        <% } %>
+      </div>
+    </div>
 
-        <!-- Filters Row -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <% } else { %>
+    
+    <!-- LOGGED USER VIEW - Search Filters -->
+    <div class="max-w-screen-xl mx-auto mb-8">
+      <div class="bg-gradient-to-r from-stone-900 to-stone-800 rounded-2xl p-4 sm:p-6 shadow-lg">
+        <form id="searchFilterForm" method="GET" action="/" class="space-y-4 sm:space-y-6">
 
-          <!-- Event Type Filter -->
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Event Type</label>
-            <select name="typeEvent" id="typeEventFilter" class="w-full px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
-              <option value="">All Types</option>
-              <option value="CONCERT" <%= currentFilters?.typeEvent === 'CONCERT' ? 'selected' : '' %>>Concert</option>
-              <option value="FESTIVAL" <%= currentFilters?.typeEvent === 'FESTIVAL' ? 'selected' : '' %>>Festival</option>
-              <option value="SHOW" <%= currentFilters?.typeEvent === 'SHOW' ? 'selected' : '' %>>Show</option>
-              <option value="COMEDY" <%= currentFilters?.typeEvent === 'COMEDY' ? 'selected' : '' %>>Comedy</option>
-              <option value="SPORTS" <%= currentFilters?.typeEvent === 'SPORTS' ? 'selected' : '' %>>Sports</option>
-              <option value="CONFERENCE" <%= currentFilters?.typeEvent === 'CONFERENCE' ? 'selected' : '' %>>Conference</option>
-              <option value="WORKSHOP" <%= currentFilters?.typeEvent === 'WORKSHOP' ? 'selected' : '' %>>Workshop</option>
-              <option value="OTHER" <%= currentFilters?.typeEvent === 'OTHER' ? 'selected' : '' %>>Other</option>
-            </select>
+          <!-- Search Bar -->
+          <div class="relative">
+            <input type="text" name="search" id="searchInput" value="<%= currentFilters?.search || '' %>" placeholder="Search events..." class="w-full px-10 sm:px-12 py-3 sm:py-4 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-orange-500 transition" />
+            <svg class="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
           </div>
 
-          <!-- Location Filter -->
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Location</label>
-            <input type="text" name="location" id="locationFilter" value="<%= currentFilters?.location || '' %>" placeholder="Enter location..." class="w-full px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition" />
-          </div>
+          <!-- Filters Grid -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <!-- Event Type -->
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-2">Event Type</label>
+              <select name="typeEvent" id="typeEventFilter" class="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-stone-800 border border-stone-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+                <option value="">All Types</option>
+                <option value="CONCERT" <%= currentFilters?.typeEvent === 'CONCERT' ? 'selected' : '' %>>Concert</option>
+                <option value="FESTIVAL" <%= currentFilters?.typeEvent === 'FESTIVAL' ? 'selected' : '' %>>Festival</option>
+                <option value="SHOW" <%= currentFilters?.typeEvent === 'SHOW' ? 'selected' : '' %>>Show</option>
+                <option value="COMEDY" <%= currentFilters?.typeEvent === 'COMEDY' ? 'selected' : '' %>>Comedy</option>
+                <option value="SPORTS" <%= currentFilters?.typeEvent === 'SPORTS' ? 'selected' : '' %>>Sports</option>
+                <option value="CONFERENCE" <%= currentFilters?.typeEvent === 'CONFERENCE' ? 'selected' : '' %>>Conference</option>
+                <option value="WORKSHOP" <%= currentFilters?.typeEvent === 'WORKSHOP' ? 'selected' : '' %>>Workshop</option>
+                <option value="OTHER" <%= currentFilters?.typeEvent === 'OTHER' ? 'selected' : '' %>>Other</option>
+              </select>
+            </div>
 
-          <!-- Price Range -->
-          <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2">Price Range (CFA)</label>
-            <div class="flex gap-2">
-              <input type="number" name="minPrice" id="minPriceFilter" value="<%= currentFilters?.minPrice || '' %>" placeholder="Min" class="w-1/2 px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition" />
-              <input type="number" name="maxPrice" id="maxPriceFilter" value="<%= currentFilters?.maxPrice || '' %>" placeholder="Max" class="w-1/2 px-4 py-3 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 transition" />
+            <!-- Location -->
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-2">Location</label>
+              <input type="text" name="location" id="locationFilter" value="<%= currentFilters?.location || '' %>" placeholder="Enter location..." class="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition" />
+            </div>
+
+            <!-- Price Range -->
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-2">Price (CFA)</label>
+              <div class="flex gap-2">
+                <input type="number" name="minPrice" id="minPriceFilter" value="<%= currentFilters?.minPrice || '' %>" placeholder="Min" class="w-1/2 px-2 sm:px-4 py-2.5 sm:py-3 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition" />
+                <input type="number" name="maxPrice" id="maxPriceFilter" value="<%= currentFilters?.maxPrice || '' %>" placeholder="Max" class="w-1/2 px-2 sm:px-4 py-2.5 sm:py-3 bg-stone-800 border border-stone-700 rounded-lg text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition" />
+              </div>
+            </div>
+
+            <!-- Sort By -->
+            <div>
+              <label class="block text-xs sm:text-sm font-medium text-gray-300 mb-2">Sort by</label>
+              <select name="sortBy" id="sortByFilter" class="w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-stone-800 border border-stone-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+                <option value="startDate" <%= currentFilters?.sortBy === 'startDate' ? 'selected' : '' %>>Date</option>
+                <option value="price" <%= currentFilters?.sortBy === 'price' ? 'selected' : '' %>>Price</option>
+                <option value="title" <%= currentFilters?.sortBy === 'title' ? 'selected' : '' %>>Title</option>
+              </select>
             </div>
           </div>
 
-          <!-- Date Range -->
-          <div class="flex flex-wrap items-center gap-4">
-                      <div class="flex items-center gap-2">
-            <label class="text-sm font-medium text-gray-300">Sort by:</label>
-            <select name="sortBy" id="sortByFilter" class="px-4 py-2 bg-stone-800 border border-stone-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
-              <option value="startDate" <%= currentFilters?.sortBy === 'startDate' ? 'selected' : '' %>>Date</option>
-              <option value="price" <%= currentFilters?.sortBy === 'price' ? 'selected' : '' %>>Price</option>
-              <option value="title" <%= currentFilters?.sortBy === 'title' ? 'selected' : '' %>>Title</option>
-            </select>
-          </div>
-
-          <div class="flex items-center gap-2">
-            <label class="text-sm font-medium text-gray-300">Order:</label>
-            <select name="sortOrder" id="sortOrderFilter" class="px-4 py-2 bg-stone-800 border border-stone-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+          <!-- Sort Order (Mobile) -->
+          <div class="sm:hidden">
+            <label class="block text-xs font-medium text-gray-300 mb-2">Order</label>
+            <select name="sortOrder" id="sortOrderFilter" class="w-full px-3 py-2.5 bg-stone-800 border border-stone-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
               <option value="asc" <%= currentFilters?.sortOrder === 'asc' ? 'selected' : '' %>>Ascending</option>
               <option value="desc" <%= currentFilters?.sortOrder === 'desc' ? 'selected' : '' %>>Descending</option>
             </select>
           </div>
-          </div>
-        </div>
-
-        <!-- Sort Options & Action Buttons -->
-        <div class="flex flex-wrap items-center gap-4">
-
 
           <!-- Action Buttons -->
-          <div class="ml-auto flex gap-3">
-            <button type="button" onclick="clearAllFilters()" class="px-6 py-2 bg-stone-700 hover:bg-stone-600 border border-stone-600 text-white rounded-lg transition font-medium">
-              Clear Filters
-            </button>
-            <button type="submit" class="px-6 py-2 bg-orange-700 hover:bg-orange-600 border border-orange-700 text-white rounded-lg transition font-medium">
-              Apply Filters
-            </button>
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+            <div class="hidden sm:flex items-center gap-2">
+              <label class="text-xs sm:text-sm font-medium text-gray-300">Order:</label>
+              <select name="sortOrder" id="sortOrderFilterDesktop" class="px-3 sm:px-4 py-2 bg-stone-800 border border-stone-700 rounded-lg text-white text-sm focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+                <option value="asc" <%= currentFilters?.sortOrder === 'asc' ? 'selected' : '' %>>Ascending</option>
+                <option value="desc" <%= currentFilters?.sortOrder === 'desc' ? 'selected' : '' %>>Descending</option>
+              </select>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:ml-auto w-full sm:w-auto">
+              <button type="button" onclick="clearAllFilters()" class="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-2 bg-stone-700 hover:bg-stone-600 border border-stone-600 text-white rounded-lg transition font-medium text-sm">Clear Filters</button>
+              <button type="submit" class="w-full sm:w-auto px-4 sm:px-6 py-2.5 sm:py-2 bg-orange-700 hover:bg-orange-600 border border-orange-700 text-white rounded-lg transition font-medium text-sm">Apply Filters</button>
+            </div>
           </div>
-        </div>
 
-        <!-- Results Count -->
-        <div class="pt-4 border-t border-stone-700">
-          <p class="text-gray-300">
-            Found <span class="font-bold text-orange-500"><%= events?.total || 0 %></span> event(s)
-          </p>
-        </div>
-      </form>
-    </div>
-    <!--Display all if user logged in-->
-    <div class=" inline-flex flex-col justify-start items-start gap-8  px-50 ">
-      <div data-show-see-all="true" data-subtitle="true" class="w-[1224px] flex flex-col justify-start items-start gap-6">
-        <div class="self-stretch h-16 py-2 border-b border-stone-900 inline-flex justify-between items-center">
-          <div class="justify-center text-white text-3xl font-semibold font-['Inter']">events</div>
-          <div data-left-icon="false" data-right-icon="false" data-size="32" data-state="active" data-style="Text" class="h-8 px-4 py-[3px] rounded-lg flex justify-center items-center gap-2 overflow-hidden">
-            <div class="justify-start text-white text-base font-normal font-['Inter'] leading-5">See all</div>
+          <!-- Results Count -->
+          <div class="pt-3 sm:pt-4 border-t border-stone-700">
+            <p class="text-gray-300 text-sm sm:text-base">
+              Found <span class="font-bold text-orange-500"><%= events?.total || 0 %></span> event(s)
+            </p>
           </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- LOGGED USER - Events Grid -->
+    <div class="max-w-screen-xl mx-auto">
+      <div class="mb-6 sm:mb-8">
+        <div class="flex justify-between items-center pb-4 border-b border-stone-900">
+          <h2 class="text-white text-2xl sm:text-3xl font-semibold">
+            All Events
+            <% if (events?.total > 0) { %>
+              <span class="text-base sm:text-lg text-gray-400">(<%= events.total %>)</span>
+            <% } %>
+          </h2>
         </div>
       </div>
-      <div class="grid grid-cols-4  justify-start items-center gap-6 overflow-x-auto">
-        <% if (events.events && events.total > 0) { %>
-        <% events.events.forEach(function(event) { %>
-        <div class="w-72 min-w-72 inline-flex flex-col justify-center items-center">
-          <div class="self-stretch h-80 relative rounded-[20px]">
-            <img class="w-72 h-80 left-0 top-0 absolute rounded-[20px] object-cover" src="<%= event.imageUrls && event.imageUrls.length > 0 ? event.imageUrls[0] : '/assets/images/default-event.jpg' %>" alt="<%= event.title %>" />
-          </div>
-          <div class="self-stretch h-40 px-2 flex flex-col justify-end items-start gap-2">
-            <div class="self-stretch bg-gradient-to-l from-stone-800 to-orange-900 rounded-2xl outline outline-1 outline-offset-[-1px] outline-zinc-800 backdrop-blur-[32px] flex flex-col justify-end items-start">
-              <div class="self-stretch p-4 flex flex-col justify-start items-start gap-4">
-                <a href="/events/<%= event.id %>/details" class=" truncate w-60 justify-start text-white text-lg font-bold font-['Inter'] hover:text-orange-400 transition">
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+        <% if (events?.events && events.total > 0) { %>
+          <% events.events.forEach(function(event) { %>
+          <div class="group w-full flex flex-col">
+            <div class="relative w-full aspect-[4/5] rounded-2xl overflow-hidden">
+              <img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" src="<%= event.imageUrls && event.imageUrls.length > 0 ? event.imageUrls[0] : '/assets/images/default-event.jpg' %>" alt="<%= event.title %>" />
+            </div>
+            
+            <div class="mt-4">
+              <div class="bg-gradient-to-l from-stone-800 to-orange-900 rounded-2xl border border-zinc-800 backdrop-blur-sm p-4">
+                <a href="/events/<%= event.id %>/details" class="block text-white text-base sm:text-lg font-bold hover:text-orange-400 transition line-clamp-2 mb-3">
                   <%= event.title %>
                 </a>
-                <div class="self-stretch inline-flex flex-col justify-between">
-                  <div class="flex justify-start items-start gap-1">
-                    <div class="size-4 relative rounded-[5px] overflow-hidden">
-                      <div class="size-3.5 left-[0.83px] top-[1.17px] absolute bg-neutral-400"></div>
-                    </div>
-                    <div class=" truncate w-60 justify-start text-white text-sm font-normal font-['Inter']">
+                
+                <div class="space-y-2 mb-3">
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400 flex-shrink-0">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                    </svg>
+                    <span class="text-white text-xs sm:text-sm truncate">
                       <%= new Date(event.startDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %>
-                    </div>
+                    </span>
                   </div>
-                  <div class="flex justify-end items-center gap-1">
-                    <div class="size-4 relative overflow-hidden">
-                      <div class="w-3 h-3.5 left-[2.17px] top-[0.83px] absolute bg-neutral-400"></div>
-                    </div>
-                    <div class="truncate line-clamp-1 slice(10) w-30 justify-center text-white text-sm font-normal font-['Inter']"><%= event.location %></div>
+                  
+                  <div class="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-400 flex-shrink-0">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+                    <span class="text-white text-xs sm:text-sm truncate"><%= event.location %></span>
                   </div>
                 </div>
-                <div class="inline-flex justify-start items-center gap-2">
-                  <div class="justify-start text-white text-xl font-bold font-['Inter']">from</div>
-                  <div class="justify-start text-white text-xl font-bold font-['Inter']"><%= event.price.toLocaleString() %> CFA</div>
+                
+                <div class="flex items-center gap-2">
+                  <span class="text-white text-sm font-normal">from</span>
+                  <span class="text-white text-lg sm:text-xl font-bold"><%= event.price.toLocaleString() %> CFA</span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <% }); %>
+          <% }); %>
         <% } else { %>
-        <div class="text-white text-center w-full py-10">
-          <p class="text-xl">No events available at the moment</p>
-        </div>
+          <div class="col-span-full text-white text-center py-12 sm:py-20">
+            <div class="flex flex-col items-center gap-4">
+              <svg class="w-16 h-16 sm:w-24 sm:h-24 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              <p class="text-xl sm:text-2xl font-bold mb-2">No events found</p>
+              <p class="text-sm sm:text-base text-gray-400">Try adjusting your filters or search terms</p>
+              <button onclick="clearAllFilters()" class="mt-4 px-6 py-2.5 bg-orange-700 hover:bg-orange-600 text-white rounded-lg transition text-sm sm:text-base">
+                Clear All Filters
+              </button>
+            </div>
+          </div>
         <% } %>
       </div>
     </div>
     <% } %>
-
-
   </section>
-  <div class="bg--500"> Hello</div>
 
-  <footer>
-    <div class="bg-gradient-to-l from-stone-800 to-orange-900  py-4 text-gray-400">
-      <div class="container px-4 mx-auto">
-        <div class="-mx-4 flex flex-wrap justify-between">
-          <div class="px-4 my-4 w-full xl:w-1/5">
-            <a href="/" class="block w-56 mb-10">
-              <img src="/assets/images/logovf5.png" class="h-15 w-50" alt="">
+  <!-- Footer - Fully Responsive -->
+  <footer class="mt-12 sm:mt-16">
+    <div class="bg-gradient-to-l from-stone-800 to-orange-900 py-8 sm:py-12 text-gray-400">
+      <div class="container px-4 sm:px-6 lg:px-8 mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          
+          <!-- Brand Section -->
+          <div class="col-span-1 sm:col-span-2 lg:col-span-1">
+            <a href="/" class="block w-40 sm:w-56 mb-6 sm:mb-10">
+              <img src="/assets/images/logovf5.png" class="h-auto w-full" alt="Logo">
             </a>
-            <p class="text-justify">
-              AsyncTeam
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio laboriosam officiis, architecto quidem
-              nesciunt expedita vero quo ratione a asperiores! Tempora ab iusto iste cum illo? Delectus cumque vero hic?
+            <p class="text-sm sm:text-base text-justify">
+              AsyncTeam - Your trusted partner for event ticketing. We make it easy to discover and attend amazing events.
             </p>
           </div>
 
-          <div class="px-4 my-4 w-full sm:w-auto">
-            <div>
-              <h2 class="text-2xl pb-4 mb-4 border-b-4 border-blue-600">Company</h2>
-            </div>
-            <ul class="leading-8">
-              <li><a href="#" class="hover:text-blue-400">About Us</a></li>
-              <li><a href="#" class="hover:text-blue-400">Terms &amp; Conditions</a></li>
-              <li><a href="#" class="hover:text-blue-400">Privacy Policy</a></li>
-              <li><a href="#" class="hover:text-blue-400">Contact Us</a></li>
+          <!-- Company Links -->
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold pb-3 sm:pb-4 mb-3 sm:mb-4 border-b-4 border-blue-600">Company</h2>
+            <ul class="space-y-2 sm:space-y-3">
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">About Us</a></li>
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">Terms &amp; Conditions</a></li>
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">Privacy Policy</a></li>
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">Contact Us</a></li>
             </ul>
           </div>
-          <div class="px-4 my-4 w-full sm:w-auto">
-            <div>
-              <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Blog</h2>
-            </div>
-            <ul class="leading-8">
-              <li><a href="#" class="hover:text-blue-400">Comment acheter un billet en ligne ?</a></li>
-              <li><a href="#" class="hover:text-blue-400">Puis-je choisir ma place avec le plan de salle ?</a></li>
-              <li><a href="#" class="hover:text-blue-400">Comment recevoir mon ticket (email, QR code, etc.) ?</a></li>
-              <li><a href="#" class="hover:text-blue-400">Comment être sûr que mon billet est valide ?</a></li>
-              <li><a href="#" class="hover:text-blue-400">5 conseils pour bien profiter de votre événement</a></li>
+
+          <!-- Blog Links -->
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold pb-3 sm:pb-4 mb-3 sm:mb-4 border-b-4 border-blue-600">Blog</h2>
+            <ul class="space-y-2 sm:space-y-3">
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">Comment acheter un billet ?</a></li>
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">Choisir sa place</a></li>
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">Recevoir mon ticket</a></li>
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">Valider mon billet</a></li>
+              <li><a href="#" class="text-sm sm:text-base hover:text-blue-400 transition">5 conseils événement</a></li>
             </ul>
           </div>
-          <div class="px-4 my-4 w-full sm:w-auto xl:w-1/5">
-            <div>
-              <h2 class="inline-block text-2xl pb-4 mb-4 border-b-4 border-blue-600">Connect With Us</h2>
+
+          <!-- Social Links -->
+          <div>
+            <h2 class="text-xl sm:text-2xl font-semibold pb-3 sm:pb-4 mb-3 sm:mb-4 border-b-4 border-blue-600">Connect</h2>
+            <div class="flex flex-wrap gap-2 sm:gap-3">
+              <a href="#" class="inline-flex items-center justify-center h-10 w-10 border border-gray-100 rounded-full hover:text-blue-400 hover:border-blue-400 transition" aria-label="Facebook">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                  <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z"></path>
+                </svg>
+              </a>
+              <a href="#" class="inline-flex items-center justify-center h-10 w-10 border border-gray-100 rounded-full hover:text-blue-400 hover:border-blue-400 transition" aria-label="Twitter">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                  <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z"></path>
+                </svg>
+              </a>
+              <a href="#" class="inline-flex items-center justify-center h-10 w-10 border border-gray-100 rounded-full hover:text-blue-400 hover:border-blue-400 transition" aria-label="Instagram">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8z"></path>
+                </svg>
+              </a>
+              <a href="#" class="inline-flex items-center justify-center h-10 w-10 border border-gray-100 rounded-full hover:text-blue-400 hover:border-blue-400 transition" aria-label="YouTube">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                  <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"></path>
+                </svg>
+              </a>
             </div>
-            <a href="#" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-              <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
-                <path d="M279.14 288l14.22-92.66h-88.91v-60.13c0-25.35 12.42-50.06 52.24-50.06h40.42V6.26S260.43 0 225.36 0c-73.22 0-121.08 44.38-121.08 124.72v70.62H22.89V288h81.39v224h100.17V288z">
-                </path>
-              </svg>
-            </a>
-            <a href="#" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-              <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                <path d="M459.37 151.716c.325 4.548.325 9.097.325 13.645 0 138.72-105.583 298.558-298.558 298.558-59.452 0-114.68-17.219-161.137-47.106 8.447.974 16.568 1.299 25.34 1.299 49.055 0 94.213-16.568 130.274-44.832-46.132-.975-84.792-31.188-98.112-72.772 6.498.974 12.995 1.624 19.818 1.624 9.421 0 18.843-1.3 27.614-3.573-48.081-9.747-84.143-51.98-84.143-102.985v-1.299c13.969 7.797 30.214 12.67 47.431 13.319-28.264-18.843-46.781-51.005-46.781-87.391 0-19.492 5.197-37.36 14.294-52.954 51.655 63.675 129.3 105.258 216.365 109.807-1.624-7.797-2.599-15.918-2.599-24.04 0-57.828 46.782-104.934 104.934-104.934 30.213 0 57.502 12.67 76.67 33.137 23.715-4.548 46.456-13.32 66.599-25.34-7.798 24.366-24.366 44.833-46.132 57.827 21.117-2.273 41.584-8.122 60.426-16.243-14.292 20.791-32.161 39.308-52.628 54.253z">
-                </path>
-              </svg>
-            </a>
-            <a href="#" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-              <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z">
-                </path>
-              </svg>
-            </a>
-            <a href="#" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full mr-1 hover:text-blue-400 hover:border-blue-400">
-              <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512">
-                <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
-                </path>
-              </svg>
-            </a>
-            <a href="#" class="inline-flex items-center justify-center h-8 w-8 border border-gray-100 rounded-full hover:text-blue-400 hover:border-blue-400">
-              <svg class="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                <path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z">
-                </path>
-              </svg>
-            </a>
           </div>
         </div>
       </div>
     </div>
-    <div class="bg-black py-4 text-white">
-      <div class="container mx-auto px-4">
-        <div class="-mx-4 flex flex-wrap justify-between">
-          <div class="px-4 w-full text-center sm:w-auto sm:text-left">
-            Copyright © 2025
-            <script>
-              new Date().getFullYear() > 2025 && document.write("- " + new Date().getFullYear())
-            </script>- 2025
-            AsyncTeam. All Rights Reserved.
+
+    <!-- Copyright Section -->
+    <div class="bg-black py-4 sm:py-6 text-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-4 text-center sm:text-left">
+          <div class="text-xs sm:text-sm">
+            Copyright © <span id="currentYear">2025</span> AsyncTeam. All Rights Reserved.
           </div>
-          <div class="px-4 w-full text-center sm:w-auto sm:text-left">
-            Made with ❤️ by AsyncTeam.
+          <div class="text-xs sm:text-sm">
+            Made with ❤️ by AsyncTeam
           </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- <script>
-          
-          goToAdmin = async () => {
-            const token = localStorage.getItem('authToken');
-            await fetch('/api/quelquechose', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-              },
-              body: JSON.stringify({ data: 'votre_donnee' })
-            })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error('Erreur:', error));
-          }
-          
-        </script> -->
-        <script>
-  function clearAllFilters() {
-    // Simply redirect to home page without any query parameters
-    window.location.href = '/';
-  }
-</script>
+  <!-- Scripts -->
+  <script>
+    // Clear filters function
+    function clearAllFilters() {
+      window.location.href = '/';
+    }
+
+    // Update current year
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Sync sort order between mobile and desktop selects
+    const mobileSelect = document.getElementById('sortOrderFilter');
+    const desktopSelect = document.getElementById('sortOrderFilterDesktop');
+    
+    if (mobileSelect && desktopSelect) {
+      mobileSelect.addEventListener('change', function() {
+        desktopSelect.value = this.value;
+      });
+      
+      desktopSelect.addEventListener('change', function() {
+        mobileSelect.value = this.value;
+      });
+    }
+  </script>
 </body>
 
 </html>

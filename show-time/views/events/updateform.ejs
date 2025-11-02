@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Show Time</title>
+</head>
+
+<body class="bg-gradient-to-l from-stone-800 to-orange-900">
+
+
+  <div class="container mx-auto p-4 ">
+    <!-- Page Title -->
+    <h1 class="text-3xl font-bold text-white mb-6">Update Event</h1>
+
+    <% if (typeof error !== 'undefined' && error) { %>
+      <div class="bg-red-500 text-white p-4 rounded-lg mb-4">
+        <%= error %>
+      </div>
+    <% } %>
+
+    <form action="/events/<%= event?.id %>" method="POST" enctype="multipart/form-data" class="grid grid-cols-1 gap-6">
+      <!-- Title -->
+      <div class="p-2">
+        <input type="text" id="title" name="title" value="<%= event.title %>" required
+          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+          style="background-color: #f6f6f6;">
+      </div>
+
+      <!-- Types Event -->
+      <div class="p-2">
+        <!-- <select id="typeEvent" name="typeEvent"
+          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+          style="background-color: #f6f6f6;">
+          <option value="">Select Event Type</option>
+          <% Object.entries(eventTypes).forEach(([key, value]) => { %>
+            <option value="<%= value %>"><%= key %></option>
+          <% }); %>
+        </select> -->
+        <select id="typeEvent" name="typeEvent"
+            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+            style="background-color: #f6f6f6;">
+
+            <option value="">Select Event Type</option>
+
+            <% Object.entries(eventTypes).forEach(([key, value]) => { %>
+                <option value="<%= value %>" <%= event.typeEvent === value ? 'selected' : '' %>><%= key %></option>
+            <% }); %>
+        </select>
+
+      </div>
+
+      <!-- Description and Image Upload -->
+      <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Description -->
+        <div>
+          <textarea id="description" name="description" rows="3" 
+            class="block w-full h-48 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+            style="background-color: #f6f6f6;"><%= event.description %></textarea>
+        </div>
+
+        <!-- Image Upload -->
+        <div>
+          <label for="imageUrls"
+            class="w-full h-48 border-2 border-dashed border-gray-300 rounded-md cursor-pointer flex flex-col items-center justify-center bg-[#f6f6f6] hover:bg-gray-50">
+            <div class="text-center">
+              <div class="mb-2">
+                <!-- <button type="button" class="bg-[#8c0327] hover:bg-[#6b0220] text-white rounded-full py-2 px-4">Select from the computer</button> -->
+              </div>
+              <p class="text-gray-500">or drag photo here</p>
+              <p class="text-gray-500 text-sm mt-1">PNG, JPG, SVG</p>
+            </div>
+          </label>
+          <input id="imageUrls" name="imageUrls" type="file" accept="image/*" multiple class="sr-only">
+          <div id="file-names" class="mt-2 text-sm text-white"></div>
+        </div>
+      </div>
+
+      <!-- Location -->
+      <div class="p-2">
+        <input type="text" id="location" name="location" value="<%= event.location %>" required
+          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+          style="background-color: #f6f6f6;">
+      </div>
+
+      <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Number of Seats -->
+        <div>
+          <input type="number" id="numberOfSeats" name="numberOfSeats" value="<%= event.numberOfSeats %>"  min="1" required
+            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+            style="background-color: #f6f6f6;">
+        </div>
+
+        <!-- Price -->
+        <div>
+          <input type="number" id="price" name="price" value="<%= event.price %> (CFA)" min="0" step="0.01" required
+            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+            style="background-color: #f6f6f6;">
+        </div>
+      </div>
+
+      <!-- Multi-select for groupes -->
+      <div class="p-2">
+        <label for="groupIds" class="block text-white text-sm font-medium mb-2">
+          Select Groups (Optional - Hold Ctrl/Cmd to select multiple)
+        </label>
+        <select id="groupIds" name="groupIds" multiple size="5"
+          class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+          style="background-color: #f6f6f6;">
+          <% if (groupes && groupes.length > 0) { %>
+            <% groupes.forEach(function(groupe) { %>
+              <option value="<%= groupe.id %>"><%= groupe.nom %></option>
+            <% }); %>
+          <% } else { %>
+            <option disabled>No groups available</option>
+          <% } %>
+        </select>
+        <p class="text-xs text-gray-300 mt-1">Hold Ctrl (Windows) or Cmd (Mac) to select multiple groups</p>
+      </div>
+
+      <!-- Start Date and End Date -->
+      <div class="p-2 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Start Date -->
+        <div class="flex items-center bg-[#f6f6f6] rounded-md p-2">
+          <span class="flex-shrink-0 flex items-center mr-3 text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 3v2M19 3v2M5 10h14M4 21h16a1 1 0 001-1V8a1 1 0 00-1-1H4a1 1 0 00-1 1v12a1 1 0 001 1z"></path>
+            </svg>
+            <span class="ml-2">Start Date</span>
+          </span>
+          <input type="datetime-local" id="startDate" name="startDate" value="<% event.startDate.toISOString().slice(0,16) %>"
+            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+            style="background-color: #f6f6f6;" >
+        </div>
+
+        <!-- End Date -->
+        <div class="flex items-center bg-[#f6f6f6] rounded-md p-2">
+          <span class="flex-shrink-0 flex items-center mr-3 text-gray-500">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 3v2M19 3v2M5 10h14M4 21h16a1 1 0 001-1V8a1 1 0 00-1-1H4a1 1 0 00-1 1v12a1 1 0 001 1z"></path>
+            </svg>
+            <span class="ml-2">End Date</span>
+          </span>
+          <input type="datetime-local" id="endDate" name="endDate" value="<% event.endDate.toISOString().slice(0,16) %>"
+            class="block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 p-2"
+            style="background-color: #f6f6f6;" >
+        </div>
+      </div>
+
+      <!-- Status and Tags -->
+      <!-- <div class="p-2 grid grid-cols-1 md:grid-cols-1 gap-6">
+        <div class="flex items-center bg-[#f6f6f6] rounded-md">
+          <select id="status" name="status"
+            class="block w-full h-12 rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50"
+            style="background-color: #f6f6f6; padding: 0;">
+            <option value="">Select Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+          </select>
+        </div> -->
+
+        <!-- <div>
+          <input type="text" id="tags" name="tags" placeholder="Tags (comma-separated)"
+            class="p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#8c0327] focus:ring-[#8c0327] focus:ring-opacity-50 h-12"
+            style="background-color: #f6f6f6;">
+        </div> -->
+      </div>
+
+      <!-- Registration Button -->
+      <div class="col-span-full mt-6 p-2">
+        <button type="submit"
+          class="block w-full bg-gradient-to-l from-slate-800 to-orange-800  text-white font-bold py-3 px-4 rounded-full">
+          Update Event
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('imageUrls').addEventListener('change', function(e) {
+      const fileNames = Array.from(e.target.files).map(file => file.name).join(', ');
+      document.getElementById('file-names').textContent = fileNames || 'No files selected';
+    });
+  </script>
+
+</body>
+
+</html>

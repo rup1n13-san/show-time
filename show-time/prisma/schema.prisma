@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum EventType {
+  CONCERT
+  FESTIVAL
+  SHOW
+  COMEDY
+  SPORTS
+  CONFERENCE
+  WORKSHOP
+  OTHER
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id                       String    @id @default(auto()) @map("_id") @db.ObjectId
+  email                    String    @unique
+  username                 String
+  password                 String
+  role                     Role      @default(USER)
+  isEmailVerified          Boolean   @default(false)
+  emailVerificationToken   String?
+  emailVerificationExpires DateTime?
+  passwordResetToken       String?
+  passwordResetExpires     DateTime?
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+
+  Ticket     Ticket[]
+  User_group User_group[]
+  User_Event User_Event[]
+}
+
+model Groupe {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  nom       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Event_group Event_group[]
+  User_group  User_group[]
+}
+
+model Event {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  description   String
+  endDate       DateTime  @db.Date
+  location      String
+  numberOfSeats Int
+  price         Float
+  startDate     DateTime  @db.Date
+  title         String
+  typeEvent     EventType
+  imageUrls     String[]  @default([])
+
+  Ticket      Ticket[]
+  User_Event  User_Event[]
+  Event_group Event_group[]
+}
+
+model Ticket {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  qrCodeLink      String?  @map("link_qr")
+  reservationDate DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id") @db.ObjectId
+
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String @map("event_id") @db.ObjectId
+
+  priceAtPurchase Float
+  isPaid          Boolean  @default(false)
+  purchasedAt     DateTime?   @map("null")
+  // // Temporary field to hold the transaction ID before confirmation
+  pendingTransactionId String? @map("pending_transaction_id")
+}
+
+model Event_group {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  groupe   Groupe @relation(fields: [groupeId], references: [id])
+  groupeId String @map("groupe_id") @db.ObjectId
+
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String @map("event_id") @db.ObjectId
+
+  @@unique([groupeId, eventId])
+}
+
+model User_group {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  groupe   Groupe @relation(fields: [groupeId], references: [id])
+  groupeId String @map("groupe_id") @db.ObjectId
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id") @db.ObjectId
+
+  @@unique([userId, groupeId])
+}
+
+model User_Event {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id") @db.ObjectId
+
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId String @map("event_id") @db.ObjectId
+
+  registredAt DateTime @default(now())
+
+  @@unique([userId, eventId])
+}

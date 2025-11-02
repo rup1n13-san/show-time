@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liste des événements</title>
+    <link rel="stylesheet" href="/css/output.css" />
+  </head>
+  <body class="bg-gray-100 text-gray-900 p-8">
+    <h1 class="text-3xl font-bold mb-6">Événements disponibles</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% events.forEach(event => { %>
+        <div class="bg-white rounded-xl shadow p-4 hover:shadow-lg transition">
+          <!-- <% event.imageUrls.forEach(img => { %>
+            <img src="<%= img %>" alt="event.image">
+          <% }) %> -->
+          <% if (event.imageUrls.length > 0) { %>
+            <img src="<%= events.imageUrls[0] %>" alt="event.image">
+          <% } %>
+          <h2 class="text-xl font-semibold"><%= event.title %></h2>
+          <p class="text-gray-600 mb-2"><%= event.description %></p>
+          <p class="text-sm text-gray-500">
+            <%= event.location %> —  <%= event.price %> FCFA
+          </p>
+          <p class="text-xs text-gray-400">
+            🗓️ <%= new Date(event.startDate).toLocaleDateString() %>
+          </p>
+        </div>
+      <% }) %>
+    </div>
+  </body>
+</html>

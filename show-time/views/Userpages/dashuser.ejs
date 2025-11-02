@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title> Panel</title>
+</head>
+
+<body>
+  <div class="flex min-h-screen mx-8 mt-6">
+    <aside class="bg-white shadow-md hidden lg:block">
+      <div class="flex flex-col justify-center items-center">
+        <img src="/assets/images/utilisateur.png" alt="avatar"
+          class="w-20 h-20 rounded-full shadow justify-center items-center mx-10 mt-6" />
+        <div class="p-6 font-bold text-black text-2xl lowercase">
+          <%= users.username %>
+        </div>
+      </div>
+
+      <div class="h-0 opacity-60 outline-1 outline-offset-1 outline-zinc-200"></div>
+
+      <div class="mx-6 mt-4">
+        <% if (users) { %>
+          <p class="text-gray-600">CONTACT</p>
+          <div class="flex gap-2 items-center">
+            <a href="#" class="block py-3 px-4 text-gray-700 hover:bg-purple-100 text-lg">
+              <%= users.username %>
+            </a>
+          </div>
+          <div class="flex items-center">
+            <a href="#" class="block py-3 px-4 text-gray-700 hover:bg-purple-100 text-lg">
+              <%= users.email %>
+            </a>
+          </div>
+          <% } %>
+      </div>
+
+      <nav class="mt-8">
+
+        <div class="flex flex-col py-3 px-6 line-clamp-1 space-y-3">
+          <button
+            class="mt-2 bg-gradient-to-l from-stone-800 to-orange-900 whitespace-nowrap text-white cursor-pointer px-4 py-2 rounded-lg shadow hover:bg-purple-700">
+            Update my profil
+          </button>
+          <div class="p-2 w-full hover:bg-gray-200">
+            <a href="/">Go to home</a>
+          </div>
+          <div class="flex items-center">
+            <img src="/assets/images/imagelogout.png" alt="" class="size-8" />
+            <button @click="logout"
+              class="block py-1 px-3 bg-gradient-to-l from-stone-800 to-orange-900 text-white hover:bg-red-300 hover:text-black rounded">
+              logout
+            </button>
+          </div>
+          
+        </div>
+      </nav>
+    </aside>
+
+    <div class="flex-1 flex flex-col">
+      <div class="p-6 space-y-6">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+
+          <div class="bg-white p-6 rounded-lg shadow-md border-2 border-lime-200">
+            <div class="flex items-center justify-between">
+              <img src="../assets/images/AbonnéeContainer.png" alt="" />
+
+            </div>
+            <img src="/assets/images/logovf6.png" class="w-10" alt="" />
+            <h2 class="text-3xl font-bold text-black mt-2">
+              <%= ticketsByUsers.length %>
+            </h2>
+            <p class="text-sm text-gray-500">My tickets</p>
+            <p class="text-sm text-gray-500"></p>
+          </div>
+          <div class="bg-white p-6 rounded-lg shadow-md border-2 border-pink-200">
+            <div class="flex items-center justify-between">
+
+            </div>
+            <img src="/assets/images/logovf6.png" class="w-10" alt="" />
+            <h2 class="text-3xl font-bold text-black mt-2">
+              <%= groups.length %>
+            </h2>
+            <div class="text-sm text-gray-500">Favorites Groupes</div>
+            <p class="text-sm text-gray-500"></p>
+          </div>
+
+          <div class="bg-white p-6 rounded-lg shadow-md border-2 border-pink-200">
+            <div class="flex items-center justify-between">
+              <img src="../assets/images/ContainerLike.png" alt="" />
+
+            </div>
+            <img src="/assets/images/logovf6.png" class="w-10" alt="" />
+            <h2 class="text-3xl font-bold text-black mt-2">
+              <%=seelater.length%>
+            </h2>
+            <p class="text-sm text-gray-500">See Later</p>
+            <p class="text-sm text-gray-500"></p>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-md">
+        </div>
+
+        <div class="p-6 justify-center">
+
+
+          <div class="w-full flex justify-between py-10 gap-10">
+
+            <div class="flex flex-col bg-white shadow shadow-black rounded-2xl h-100 overflow-y-auto w-1/2">
+
+
+              <h3 class="p-3 font-bold text-2xl">My Tickets</h3>
+              <% ticketsByUsers.forEach(tickets=> { %>
+
+                <div class="flex gap-6 p-6 border-b border-gray-200">
+                  <div class="flex space-y-1 gap-4 items-center">
+                    <img src="/assets/images/logovf6.png" class="w-10" alt="icone user">
+                    <a  href="/tickets/<%=tickets.id%>/my-ticket" class="text-lg text-black ">
+                      <%= tickets.event.title %>
+                    </a>
+                    <p class="text-sm font-bold text-black">
+                      <%= tickets.priceAtPurchase %> CFA
+                    </p>
+                    <% if(tickets.isPaid==false) { %>
+                      <div class="flex gap-2">
+                        <button value="Actif" type="submit"
+                          class="bg-red-700 w-auto mx-1 p-1 text-xs rounded-lg text-white font-bold"> Not Paid </button>
+                        <button value="Actif" type="submit"
+                          class="bg-orange-500 w-10 mx-1 p-1 text-xs rounded-lg text-white font-bold"> Pay </button>
+                      </div>
+                      <% } else { %>
+                        <button value="Actif" type="submit"
+                          class="bg-green-500 w-auto mx-1 p-1 text-xs rounded-lg text-black font-bold"> Paid </button>
+                        <% }%>
+                  </div>
+                </div>
+                <% })%>
+            </div>
+
+            <div class="flex flex-col bg-white shadow-sm shadow-black rounded-2xl h-100 w-1/2 overflow-y-auto">
+
+
+              <h3 class="p-3 font-bold text-2xl">Favaorites Groupes</h3>
+              <% groups.forEach(group=> { %>
+
+                <div class="flex gap-6 p-6 border-b border-gray-200">
+                  <div class="flex space-y-1 gap-4 items-center">
+                    <img src="/assets/images/logovf6.png" class="w-10" alt="icone user">
+                    <p class="text-lg text-black">
+                      <%= group.groupe.nom %>
+                    </p>
+                  </div>
+                </div>
+                <% })%>
+            </div>
+
+          </div>
+
+          <div class="w-full flex justify-between  py-10 gap-10">
+
+            <div class="flex flex-col bg-white shadow-sm shadow-black rounded-2xl h-50 w-full">
+
+
+              <h3 class="p-3 font-bold text-2xl">See Later </h3>
+              <% seelater.forEach(see=> { %>
+
+                <div class="flex gap-6 p-6 border-b border-gray-200">
+                  <div class="flex space-y-1 gap-4 items-center">
+                    <img src="/assets/images/logovf6.png" class="w-10" alt="icone user">
+                    <p class="text-lg text-black">
+                      <%= see.event.title %>
+                    </p>
+                  </div>
+                </div>
+                <% })%>
+            </div>
+
+
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
+
+</html>

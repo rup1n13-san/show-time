@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Admin Panel</title>
+</head>
+
+<body class="bg-gray-50">
+
+  <div class="flex min-h-screen mx-8 mt-6 md:gap-10 overflow-auto">
+
+    <!-- ======= SIDEBAR ======= -->
+    <aside class="bg-white shadow-md hidden lg:block sm:hidden">
+      <div class="flex flex-col justify-center items-center">
+        <img src="/assets/images/utilisateur.png" alt="Profile" class="w-20 h-20 rounded-full shadow justify-center items-center mx-10 mt-6">
+        <div class="p-6 font-bold text-black text-2xl">Panel Admin</div>
+      </div>
+
+      <div class="h-0 opacity-60 outline-1 outline-offset-1 outline-zinc-200"></div>
+
+      <div class="mx-6 mt-4">
+        <p class="text-gray-600">USERNAME</p>
+        <div class="flex gap-2 items-center">
+          <a href="#" class="block py-3 px-4 text-gray-700 hover:bg-purple-100 text-lg">
+            <%=user.username %>
+          </a>
+        </div>
+        <div class="flex items-center">
+          <a href="#" class="block py-3 px-4 text-gray-700 hover:bg-purple-100 text-lg">
+            <%=user.email %>
+          </a>
+        </div>
+
+      </div>
+
+
+      <nav class="mt-8 flex items-center gap-2">
+        <img src="/assets/images/imagelogout.png" alt="" class="size-8" />
+        <form action="/auth/logout" method="POST" class="block">
+          <button type="submit" class="w-full text-left px-4 py-2 text-red-600 hover:bg-gray-100 rounded-b-lg">
+            Logout
+          </button>
+        </form>
+      </nav>
+    </aside>
+
+    <!-- ======= MAIN CONTENT ======= -->
+    <div class="flex flex-col w-full space-y-6">
+
+      <!-- Boutons de navigation -->
+      <div class="flex bg-gray-200 justify-between px-5 py-1 w-auto rounded-lg">
+        <button type="button" onclick="afficherVue('vuedensembe')" class="bg-white rounded-lg px-10 cursor-pointer button">Vue d'ensemble</button>
+        <button type="button" onclick="afficherVue('vueUtilisateur')" class="bg-red-300 cursor-pointer rounded-lg px-10 hover:bg-white button">Utilisateurs</button>
+        <button type="button" onclick="afficherVue('vueContenue')" class="bg-yellow-200 cursor-pointer rounded-lg px-10 hover:bg-white button">Contenu</button>
+      </div>
+
+      <!-- ======= Vue d’ensemble ======= -->
+      <div id="vuedensembe" class="vue">
+        <div class="space-y-6">
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6 w-full">
+            <div class="flex bg-white p-6 rounded-lg shadow-md border-2 border-orange-700 items-center justify-between">
+              <div>
+                <p class="text-sm text-gray-500">All Users</p>
+                <% if (totalUsers){ %>
+                <p class="text-3xl font-bold text-black">
+                  <%=totalUsers %>
+                </p>
+                <%}%>
+
+              </div>
+            </div>
+            <!-- <% if (user.role === 'ADMIN') { %>
+                <a href="/admin" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Admin Panel</a>
+                <% } %> -->
+                <div class="flex bg-white p-6 rounded-lg shadow-md border-2 border-orange-700 items-center justify-between">
+                  <div>
+                    <p class="text-sm text-gray-500">All Events </p>
+                    <% if (totalEvents){ %>
+                    <h2 class="text-3xl font-bold text-black mt-2">
+                      <%=totalEvents %>
+                    </h2>
+                    <%}%>
+              </div>
+            </div>
+
+            <div class="flex bg-white p-6 rounded-lg shadow-md border-2 border-orange-700 items-center justify-between">
+              <div>
+                <p class="text-sm text-gray-500">All Groupes</p>
+                <% if (totalGroups){ %>
+                    <h2 class="text-3xl font-bold text-black mt-2">
+                      <%=totalGroups %>
+                    </h2>
+                    <%}%>
+              </div>
+            </div>
+
+            <div class="flex bg-white p-6 rounded-lg shadow-md border-2 border-orange-700 items-center justify-between">
+              <div>
+                <p class="text-sm text-gray-500">All tickets sells</p>
+                <% if (totalTickets){ %>
+                    <h2 class="text-3xl font-bold text-black mt-2">
+                      <%=totalTickets %>
+                    </h2>
+                    <%}%>
+              </div>
+            </div>
+
+          </div>
+          <div class="relative pt-[10px] h-screen">
+
+            <div>
+              <div class="flex items-start">
+                <button id="toggle-sidebar"
+                  class="lg:hidden w-8 h-8 z-[100] fixed top-[74px] left-[10px] cursor-pointer bg-[#007bff] flex items-center justify-center rounded-full outline-0 transition-all duration-500">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" class="w-3 h-3" viewBox="0 0 55.752 55.752">
+                    <path
+                      d="M43.006 23.916a5.36 5.36 0 0 0-.912-.727L20.485 1.581a5.4 5.4 0 0 0-7.637 7.638l18.611 18.609-18.705 18.707a5.398 5.398 0 1 0 7.634 7.635l21.706-21.703a5.35 5.35 0 0 0 .912-.727 5.373 5.373 0 0 0 1.574-3.912 5.363 5.363 0 0 0-1.574-3.912z"
+                      data-original="#000000" />
+                  </svg>
+                </button>
+                <section class="main-content w-full overflow-auto p-4 space-y-5">
+                  <div class="flex ">
+
+                    <a href="/events/add"
+                      class="mt-2 flex items-center bg-gradient-to-l from-stone-800 to-orange-900 whitespace-nowrap text-white cursor-pointer px-4 py-2 rounded-lg shadow hover:bg-purple-700">
+
+                      <svg class="size-6" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M11.25 12.75V18H12.75V12.75H18V11.25H12.75V6H11.25V11.25H6V12.75H11.25Z" fill="#ffffff">
+                          </path>
+                        </g>
+                      </svg>
+
+                      <span>Add Event</span>
+                    </a>
+
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden mt-5">
+                      <thead class="bg-gradient-to-l from-stone-800 to-orange-900 whitespace-nowrap">
+                        <tr>
+                          <th class="p-4 text-left text-sm font-medium text-white">ID</th>
+                          <th class="p-4 text-left text-sm font-medium text-white">title</th>
+                          <th class="p-4 text-left text-sm font-medium text-white">Description</th>
+                          <th class="p-4 text-left text-sm font-medium text-white">Actions</th>
+                        </tr>
+                      </thead>
+                      <% events.forEach(event=> { %>
+                    <tbody>
+                      <tr class="border-b hover:bg-gray-50">
+                        <td class="p-4 text-sm text-black">
+                          <%= event.id %>
+                        </td>
+                        <td class="p-4 text-sm text-black">
+                          <%= event.title %>
+                        </td>
+                        <td class="p-4 text-sm text-black">
+                          <%= event.description %>
+                        </td>
+                        <td class="p-4 flex items-center space-x-3">
+
+                          <a href="/events/<%= event.id %>/update" class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
+                              <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
+                              <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
+                            </svg>
+                          </a>
+
+                          <a href='/events/<%= event.id %>/delete' class="cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
+                              <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
+                              <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
+                            </svg>
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                    <% }) %>
+
+                    </table>
+                  </div>
+                  </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ======= View users ======= -->
+        <div id="vueUtilisateur" class="vue hidden">
+          <div class="bg-white rounded-lg shadow-md">
+            <div class="p-4 border-b border-gray-400 font-bold text-black">List users</div>
+            <section class="main-content w-full overflow-auto p-4">
+              <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                  <thead class="bg-gradient-to-l from-stone-800 to-orange-900 whitespace-nowrap">
+                    <tr>
+                      <th class="p-4 text-left text-sm font-medium text-white">ID</th>
+                      <th class="p-4 text-left text-sm font-medium text-white">Username</th>
+                      <th class="p-4 text-left text-sm font-medium text-white">Email</th>
+                      <th class="p-4 text-left text-sm font-medium text-white">Actions</th>
+                    </tr>
+                  </thead>
+                  <% users.forEach(users=> { %>
+
+                  <tbody>
+                    <tr class="border-b hover:bg-gray-50">
+                      <td class="p-4 text-sm text-black">
+                        <%= users.id %>
+                      </td>
+                      <td class="p-4 text-sm text-black">
+                        <%= users.username %>
+                      </td>
+                      <td class="p-4 text-sm text-black">
+                        <%= users.email %>
+                      </td>
+                      <td class="p-4 flex items-center space-x-3">
+
+                        <a href='' class="cursor-pointer">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
+                            <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
+                            <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
+                          </svg>
+                        </a>
+
+                        <a href='' class="cursor-pointer">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
+                            <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
+                            <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
+                          </svg>
+                        </a>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <% }) %>
+
+                </table>
+              </div>
+            </section>
+          </div>
+        </div>
+        <!-- ======= View Event ======= -->
+        <div id="vueContenue" class="vue hidden">
+          <div class="bg-white rounded-lg shadow-md">
+            <div class="p-4 border-b border-gray-400 font-bold text-black">List events</div>
+
+            <section class="main-content w-full overflow-auto p-4">
+              <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                  <thead class="bg-gradient-to-l from-stone-800 to-orange-900 whitespace-nowrap">
+                    <tr>
+                      <th class="p-4 text-left text-sm font-medium text-white">ID</th>
+                      <th class="p-4 text-left text-sm font-medium text-white">title</th>
+                      <th class="p-4 text-left text-sm font-medium text-white">Description</th>
+                      <th class="p-4 text-left text-sm font-medium text-white">Actions</th>
+                    </tr>
+                  </thead>
+                  <% events.forEach(event=> { %>
+                  <tbody>
+                    <tr class="border-b hover:bg-gray-50">
+                      <td class="p-4 text-sm text-black">
+                        <%= event.id %>
+                      </td>
+                      <td class="p-4 text-sm text-black">
+                        <%= event.title %>
+                      </td>
+                      <td class="p-4 text-sm text-black">
+                        <%= event.description %>
+                      </td>
+                      <td class="p-4 flex items-center space-x-3">
+
+                        <a href='' class="cursor-pointer">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
+                            <path d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z" data-original="#000000" />
+                            <path d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z" data-original="#000000" />
+                          </svg>
+                        </a>
+
+                        <a href='' class="cursor-pointer">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
+                            <path d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z" data-original="#000000" />
+                            <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z" data-original="#000000" />
+                          </svg>
+                        </a>
+                      </td>
+                    </tr>
+
+                  </tbody>
+                  <% }) %>
+
+                </table>
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======= SCRIPT ======= -->
+      <script>
+        function afficherVue(idDiv) {
+          const toutesLesVues = document.querySelectorAll('.vue');
+          toutesLesVues.forEach(vue => vue.style.display = 'none');
+
+          const vueaAfficher = document.getElementById(idDiv);
+          if (vueaAfficher) {
+            vueaAfficher.style.display = 'block';
+          }
+        }
+      </script>
+
+</body>
+
+</html>

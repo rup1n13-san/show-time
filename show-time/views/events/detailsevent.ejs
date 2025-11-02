@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Document</title>
+</head>
+
+<body class="bg-gradient-to-l from-stone-800 to-orange-900">
+  <div class=" m-6 flex mt-10">
+    <a href="/" class="p-4 bg-white rounded-lg justify-center">Go back</a>
+  </div>
+  <section class="font-['Poppins'] flex items-center justify-center mt-20">
+    <div class="flex w-[1300px] p-10 bg-white border-gray-400 rounded-xl border-2">
+      <div class="flex flex-col gap-14 items-center">
+        <svg width="16" height="10" viewBox="0 0 16 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15 8.5L8 1.5L1 8.5" stroke="#999999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <div class="flex flex-col gap-3">
+          <% if (event.imageUrls && event.imageUrls.length > 0) { %>
+          <% event.imageUrls.forEach((url) => { %>
+          <img class="w-20 h-[90px] object-cover rounded-md border border-gray-200" src="<%= url %>" alt="event image" />
+          <% }) %>
+          <% } else { %>
+          <!-- Si pas d'images, affiche une image par défaut -->
+          <img class="w-20 h-[90px] object-cover rounded-md border border-gray-200 opacity-60" src="/assets/images/image5.jpg" alt="No image available" />
+          <% } %>
+        </div>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 8.5L12 15.5L5 8.5" stroke="#999999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <img class="w-[556px] ml-3 mr-6" src="<%=event.imageUrls[0]%>" alt="" />
+      <div>
+        <div class="flex gap-2 items-center">
+          <h1 class="text-[36px] leading-[44px] font-semibold text-black">
+            <%=event.title%>
+          </h1>
+          <span class="text-sm text-white px-2 py-1 bg-orange-700 bg-opacity-20"> <%=event.typeEvent%></span>
+        </div>
+        <div class="h-9 mt-5 justify-start items-center gap-3 inline-flex">
+          <div class="justify-start items-center gap-1 flex">
+            <div class="text-[#2c732f] text-2xl font-medium leading-9">
+              <%=event.price%> CFA
+            </div>
+          </div>
+        </div>
+        <!-- Section Groupes-->
+        <div class="h-auto flex w-full justify-between items-start gap-4 flex-wrap">
+          <div class="justify-start items-start gap-2 flex flex-wrap flex-1">
+            <span class="text-[#191919] text-sm font-semibold leading-[21px] mt-1">Groupes:</span>
+            <div class="flex flex-wrap gap-2 items-center">
+              <% if (event.Event_group && event.Event_group.length > 0) { %>
+              <% event.Event_group.forEach(eg => { %>
+              <div class="group relative flex items-center gap-2 bg-gradient-to-r from-gray-100 to-gray-50 hover:from-orange-50 hover:to-orange-100 rounded-full px-4 py-2 border border-gray-200 hover:border-orange-300 transition-all duration-300 shadow-sm hover:shadow-md">
+                <!-- Nom du groupe -->
+                <span class="text-sm text-gray-700 font-medium group-hover:text-orange-700 transition-colors duration-300">
+                  <%= eg.groupe.nom %>
+                </span>
+
+                <% if (user) { %>
+                <!-- Formulaire pour ajouter aux favoris -->
+                <form action="/users/<%= user.id %>/groupes" method="POST" class="inline-flex">
+                  <input type="hidden" name="groupIds" value="<%= eg.groupe.id %>">
+                  <button type="submit" class="relative inline-flex items-center justify-center p-1 rounded-full hover:bg-white transition-all duration-300" title="Ajouter aux favoris">
+                    <!-- Icône coeur -->
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400 hover:text-orange-600 hover:scale-110 transition-all duration-300 cursor-pointer">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                    </svg>
+
+                    <!-- Tooltip -->
+                    <span class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-white bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap pointer-events-none">
+                      Add to favorites
+                    </span>
+                  </button>
+                </form>
+                <% } else { %>
+                <!-- Si pas connecté, montrer l'icône inactive avec lien vers login -->
+                <a href="/auth/login" class="inline-flex items-center justify-center p-1 rounded-full hover:bg-white transition-all duration-300" title="Connectez-vous pour ajouter aux favoris">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-300 cursor-pointer">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                  </svg>
+                </a>
+                <% } %>
+              </div>
+              <% }); %>
+              <% } else { %>
+              <div class="flex items-center gap-2 px-4 py-2 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+                </svg>
+                <p class="text-gray-500 text-sm italic">Aucun groupe associé à cet événement</p>
+              </div>
+              <% } %>
+            </div>
+          </div>
+
+          <!-- Share section -->
+          <div class="justify-start items-center gap-2.5 flex flex-wrap">
+            <h2 class="text-[#191919] text-sm font-normal leading-[21px]">Share event:</h2>
+            <div class="justify-start items-start gap-[5px] flex">
+              <!-- Facebook -->
+              <a href="#" class="w-10 h-10 relative hover:scale-110 transition-transform duration-300">
+                <div class="w-10 h-10 left-0 top-0 absolute bg-orange-700 rounded-full hover:bg-orange-600"></div>
+                <div class="left-[11px] top-[11px] absolute">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.9981 2.98875H13.6414V0.12675C13.3579 0.08775 12.3829 0 11.2474 0C8.87813 0 7.25513 1.49025 7.25513 4.22925V6.75H4.64062V9.9495H7.25513V18H10.4606V9.95025H12.9694L13.3676 6.75075H10.4599V4.5465C10.4606 3.62175 10.7096 2.98875 11.9981 2.98875Z" fill="white" />
+                  </svg>
+                </div>
+              </a>
+
+              <!-- Twitter -->
+              <a href="#" class="w-10 h-10 relative hover:scale-110 transition-transform duration-300 rounded-full">
+                <div class="w-10 h-10 left-0 top-0 absolute bg-gray-300 hover:bg-gray-400 rounded-full"></div>
+                <div class="left-[11px] top-[11px] absolute">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 3.41888C17.3306 3.7125 16.6174 3.90713 15.8737 4.00163C16.6388 3.54488 17.2226 2.82713 17.4971 1.962C16.7839 2.38725 15.9964 2.68763 15.1571 2.85525C14.4799 2.13413 13.5146 1.6875 12.4616 1.6875C10.4186 1.6875 8.77387 3.34575 8.77387 5.37863C8.77387 5.67113 8.79862 5.95238 8.85938 6.22013C5.7915 6.0705 3.07687 4.60013 1.25325 2.36025C0.934875 2.91263 0.748125 3.54488 0.748125 4.2255C0.748125 5.5035 1.40625 6.63638 2.38725 7.29225C1.79437 7.281 1.21275 7.10888 0.72 6.83775C0.72 6.849 0.72 6.86363 0.72 6.87825C0.72 8.6715 1.99912 10.161 3.6765 10.5041C3.37612 10.5863 3.04875 10.6256 2.709 10.6256C2.47275 10.6256 2.23425 10.6121 2.01038 10.5626C2.4885 12.024 3.84525 13.0984 5.4585 13.1333C4.203 14.1154 2.60888 14.7071 0.883125 14.7071C0.5805 14.7071 0.29025 14.6936 0 14.6565C1.63462 15.7106 3.57188 16.3125 5.661 16.3125C12.4515 16.3125 16.164 10.6875 16.164 5.81175C16.164 5.64863 16.1584 5.49113 16.1505 5.33475C16.8829 4.815 17.4982 4.16588 18 3.41888Z" fill="#4D4D4D" />
+                  </svg>
+                </div>
+              </a>
+
+              <!-- Pinterest -->
+              <a href="#" class="w-10 h-10 relative hover:scale-110 transition-transform duration-300 rounded-full">
+                <div class="w-10 h-10 left-0 top-0 absolute bg-gray-300 hover:bg-gray-400 rounded-full"></div>
+                <div class="left-[11px] top-[11px] absolute">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.24446 0C4.31112 0 1.6875 3.16139 1.6875 6.60855C1.6875 8.20724 2.58079 10.2008 4.01073 10.8331C4.22786 10.931 4.34599 10.8894 4.39437 10.688C4.43712 10.535 4.62501 9.79807 4.71614 9.45042C4.74426 9.33904 4.72964 9.24229 4.63963 9.13766C4.16486 8.58864 3.78797 7.58847 3.78797 6.65017C3.78797 4.24594 5.69943 1.91146 8.95195 1.91146C11.7646 1.91146 13.7323 3.73854 13.7323 6.35204C13.7323 9.30529 12.1696 11.3484 10.1389 11.3484C9.01495 11.3484 8.17792 10.4663 8.44343 9.37505C8.76407 8.07561 9.39297 6.6783 9.39297 5.74113C9.39297 4.90072 8.9182 4.20544 7.94841 4.20544C6.80423 4.20544 5.87606 5.33837 5.87606 6.85943C5.87606 7.82585 6.21808 8.47838 6.21808 8.47838C6.21808 8.47838 5.08628 13.0506 4.87589 13.9045C4.52038 15.3502 4.92427 17.6914 4.95915 17.8928C4.98052 18.0042 5.1054 18.0391 5.17516 17.9479C5.28654 17.8017 6.6546 15.8497 7.03824 14.4389C7.17775 13.9248 7.7504 11.84 7.7504 11.84C8.12729 12.5207 9.21521 13.0911 10.374 13.0911C13.8212 13.0911 16.312 10.0613 16.312 6.30141C16.2997 2.69675 13.2148 0 9.24446 0Z" fill="#4D4D4D" />
+                  </svg>
+                </div>
+              </a>
+
+              <!-- Instagram -->
+              <a href="#" class="w-10 h-10 relative hover:scale-110 transition-transform duration-300 rounded-full">
+                <div class="w-10 h-10 left-0 top-0 absolute bg-gray-300 hover:bg-gray-400 rounded-full"></div>
+                <div class="left-[11px] top-[11px] absolute">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.982 5.29205C17.9398 4.33564 17.7852 3.67812 17.5636 3.10836C17.335 2.50359 16.9834 1.96213 16.5227 1.51201C16.0726 1.05489 15.5276 0.699691 14.9298 0.474702C14.3568 0.253147 13.7027 0.0984842 12.7463 0.0563159C11.7827 0.0105764 11.4768 0 9.03299 0C6.58916 0 6.28327 0.0105764 5.32329 0.0527447C4.36688 0.0949129 3.70936 0.249713 3.13975 0.471131C2.53483 0.699691 1.99338 1.05132 1.54326 1.51201C1.08614 1.96213 0.731077 2.50716 0.505951 3.10493C0.284397 3.67812 0.129734 4.33207 0.0875658 5.28848C0.0418264 6.25203 0.03125 6.55792 0.03125 9.00176C0.03125 11.4456 0.0418264 11.7515 0.0839946 12.7115C0.126163 13.6679 0.280963 14.3254 0.502517 14.8952C0.731077 15.4999 1.08614 16.0414 1.54326 16.4915C1.99338 16.9486 2.5384 17.3038 3.13618 17.5288C3.70936 17.7504 4.36331 17.905 5.31986 17.9472C6.2797 17.9895 6.58573 17.9999 9.02956 17.9999C11.4734 17.9999 11.7793 17.9895 12.7393 17.9472C13.6957 17.905 14.3532 17.7504 14.9228 17.5288C16.1325 17.0611 17.0889 16.1047 17.5566 14.8952C17.778 14.322 17.9328 13.6679 17.975 12.7115C18.0172 11.7515 18.0277 11.4456 18.0277 9.00176C18.0277 6.55792 18.0242 6.25203 17.982 5.29205Z" fill="#4D4D4D" />
+                  </svg>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <p class="w-[500px] text-justify text-[#7f7f7f] text-sm font-normal mt-4 leading-[21px]">
+          <%=event.description%>
+        </p>
+        <form action="/tickets" method="post">
+          <div class="h-[88px] mt-6 py-[18px] bg-white shadow-[0px_-1px_0px_0px_rgba(229,229,229,1.00)] border border-white justify-center items-center gap-3 flex">
+            <div class="p-2 bg-white rounded-[170px] border border-neutral-200 justify-center items-center flex">
+              <!-- user and event information -->
+              <input type="hidden" name="userId" value="<%= user.id %>">
+              <input type="hidden" name="eventId" value="<%= event.id %>">
+              <!-- button decrement -->
+              <button class="w-[34px] h-[34px]" id="buttonDecrement" type="button">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.33398 7H11.6673" stroke="#666666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg></button>
+
+              <!-- quantity of ticket-->
+              <input placeholder="5" id="quantity" name="quantity" type="number" class="w-10 text-center text-[#191919] text-base font-normal leading-normal" />
+
+              <!-- button Increment -->
+              <button class="flex items-center justify-end w-[34px] h-[34px] " id="buttonIncrement" type="button">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M2.33398 6.99998H11.6673M7.00065 2.33331V11.6666V2.33331Z" stroke="#1A1A1A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </button>
+            </div>
+            <button type="submit" class="h-[51px] px-20 py-4 bg-orange-700 rounded-[43px] justify-center items-center gap-4 flex cursor-pointer">
+              <span class="text-white text-base font-semibold leading-tight">Book ticket</span>
+              <div>
+                <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5.16667 7.33333H2.66667L1 16.5H16L14.3333 7.33333H11.8333M5.16667 7.33333V4.83333C5.16667 2.99239 6.65905 1.5 8.5 1.5V1.5C10.3409 1.5 11.8333 2.99238 11.8333 4.83333V7.33333M5.16667 7.33333H11.8333M5.16667 7.33333V9.83333M11.8333 7.33333V9.83333" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                  </path>
+                </svg>
+              </div>
+            </button>
+        </form>
+        <div class="h-[54px] mt-6 flex-col justify-start items-start gap-3 inline-flex">
+          <div class="justify-start items-start gap-1.5 inline-flex flex-col">
+            <div class="flex gap-1"> <span class="text-[#000000] text-sm font-medium leading-[21px]">Category: </span><span class="text-[#000000] text-sm font-normal leading-[21px]"><%=event.typeEvent%></span>
+            </div>
+            <div class="flex gap-1">
+              <span class="text-black text-sm font-medium leading-[21px]">Number of tickets:</span><span class="text-black text-sm font-normal leading-[21px]"><%=event.numberOfSeats%></span>
+            </div>
+          </div>
+          <div class="justify-start items-start gap-1.5 inline-flex">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+
+</html>
+<script>
+  const buttonIncrement = document.getElementById('buttonIncrement')
+  const buttonDecrement = document.getElementById('buttonDecrement')
+  const quantity = document.getElementById('quantity')
+
+  quantity.value = 1
+  buttonDecrement.addEventListener('click', function() {
+    if (quantity.value > 1) {
+      quantity.value = quantity.value - 1
+    }
+  });
+  buttonIncrement.addEventListener('click', function() {
+    //limit number of ticket a user can buy
+    if (quantity.value < 10) {
+      quantity.value++
+    }
+  });
+</script>

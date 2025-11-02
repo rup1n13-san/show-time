@@ -1,0 +1,137 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-4">
+
+  <!-- Main QR Code Card -->
+  <main class="w-full max-w-md">
+    <!-- Card Container -->
+    <div class="bg-gradient-to-br from-orange-600 to-orange-700 rounded-2xl shadow-2xl p-8 border-2 border-orange-500">
+      
+      <!-- Header -->
+      <div class="text-center mb-6">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4 shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-8 h-8 text-orange-600">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 3.75 9.375v-4.5ZM3.75 14.625c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5a1.125 1.125 0 0 1-1.125-1.125v-4.5ZM13.5 4.875c0-.621.504-1.125 1.125-1.125h4.5c.621 0 1.125.504 1.125 1.125v4.5c0 .621-.504 1.125-1.125 1.125h-4.5A1.125 1.125 0 0 1 13.5 9.375v-4.5Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
+          </svg>
+        </div>
+        <h1 class="text-2xl font-bold text-white mb-2">Your Ticket QR Code</h1>
+        <p class="text-white text-sm opacity-90">Scan this code to view your ticket details</p>
+      </div>
+
+      <!-- QR Code Container -->
+      <div class="bg-white rounded-xl p-6 shadow-inner mb-6 flex justify-center items-center">
+        <div id="qrcode" class="inline-block"></div>
+      </div>
+
+      <!-- Info Message -->
+      <div class="bg-orange-800 bg-opacity-50 border border-orange-400 rounded-lg p-3 mb-6">
+        <div class="flex items-start gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-white flex-shrink-0 mt-0.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" />
+          </svg>
+          <p class="text-white text-xs">
+            Save this QR code for quick access at the event entrance. You can download it or view your full ticket details.
+          </p>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-3">
+        <!-- Download Button -->
+        <button 
+          id="download-button" 
+          class="w-full group relative inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white hover:bg-orange-50 text-orange-700 font-bold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 group-hover:translate-y-0.5 transition-transform duration-300">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+          </svg>
+          <span>Download QR Code</span>
+        </button>
+
+        <!-- View Ticket Button -->
+        <a 
+          href="/tickets/<%=ticket.id%>/my-ticket" 
+          class="w-full group relative inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-black hover:bg-gray-900 border-2 border-orange-500 text-orange-500 hover:text-orange-400 font-bold rounded-lg shadow-[0_0_20px_rgba(251,146,60,0.3)] hover:shadow-[0_0_30px_rgba(251,146,60,0.5)] transform hover:scale-105 transition-all duration-300"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 0 1 0 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 0 1 0-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375Z" />
+          </svg>
+          <span>View Full Ticket</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Back to Dashboard Link -->
+    <div class="mt-6 text-center">
+      <a 
+        href="/users/<%=ticket.userId%>/dashuser" 
+        class="inline-flex items-center gap-2 text-gray-400 hover:text-orange-500 text-sm font-medium transition-colors duration-300"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+        <span>Back to My Tickets</span>
+      </a>
+    </div>
+  </main>
+
+</body>
+
+
+
+<script>
+  const qrText = '<%- ticket.qrCodeData %>';
+
+  if (qrText) {
+    new QRCode(document.getElementById('qrcode'), {
+      text: qrText,
+      width: 120,
+      height: 120,
+      colorDark: '#ffffff',
+      colorLight: '#E65100',
+      correctLevel: QRCode.CorrectLevel.H,
+    });
+  }
+
+  // Function to convert Base64 string to Blob
+  function base64ToBlob(base64, contentType = '', sliceSize = 512) {
+    const byteCharacters = atob(base64.split(',')[1]);
+    const byteArrays = [];
+
+    for (
+      let offset = 0; offset < byteCharacters.length; offset += sliceSize
+    ) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {
+      type: contentType
+    });
+    return blob;
+  }
+  // Listen for download button click
+  const downloadButton = document.getElementById('download-button');
+  const qrCanvas = document.getElementById('qrcode');
+  const image = document.querySelector('img');
+  downloadButton.addEventListener('click', function() {
+    const blob = base64ToBlob(image.src, 'image/png');
+    const filename = 'myqrcode.png';
+    const downloadLink = document.createElement('a');
+    downloadLink.setAttribute('download', filename);
+    const url = URL.createObjectURL(blob);
+    downloadLink.setAttribute('href', url);
+    downloadLink.click();
+  });
+</script>
+</div>

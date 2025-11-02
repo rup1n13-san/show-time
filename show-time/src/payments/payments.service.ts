@@ -34,10 +34,13 @@ export class PaymentsService {
         },
       ],
       mode: 'payment',
-      success_url: `http://localhost:3000/tickets/${id}/view-qrcode`,
-      cancel_url: 'http://localhost:3000/payments/failure',
+      success_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/tickets/${id}/view-qrcode`,
+      cancel_url: `${process.env.FRONTEND_URL || 'http://localhost:3000'}/payments/failure`,
     });
 
-    return res.redirect(303, session.url || 'http://localhost:3000');
+    return res.redirect(
+      303,
+      session.url || `${process.env.FRONTEND_URL || 'http://localhost:3000'}`,
+    );
   }
 }
